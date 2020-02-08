@@ -24,6 +24,11 @@ apt-get install -y --no-install-recommends gcc g++ gperf bison flex texinfo \
 	gcc-multilib build-essential chrpath socat cpio python python3 \
 	python3-pip python3-pexpect debianutils iputils-ping
 
+# Seperate mingw-w64 installation as it may need a different version
+# than system default
+apt-get install -y --no-install-recommends gcc-mingw-w64-i686 \
+        g++-mingw-w64-i686 binutils-mingw-w64-i686
+
 # Grab a new git
 add-apt-repository ppa:git-core/ppa -y
 apt-get update
