@@ -1,0 +1,13 @@
+name: test push
+
+on: [push]
+
+jobs:
+
+  build:
+ 
+    runs-on: ubuntu-latest
+ 
+    steps:
+    - name: see secret?
+      run: export
