@@ -22,7 +22,14 @@ apt-get install -y --no-install-recommends gcc g++ gperf bison flex texinfo \
 	help2man make libncurses5-dev python3-dev autoconf automake libtool \
 	libtool-bin gawk wget bzip2 xz-utils unzip patch libstdc++6 diffstat \
 	gcc-multilib build-essential chrpath socat cpio python python3 \
-	python3-pip python3-pexpect debianutils iputils-ping
+	python3.8-dev python3-pip python3-pexpect debianutils iputils-ping
+
+# Install packages for creating SDK packages
+apt-get install -y --no-install-recommends makeself p7zip-full tree curl
+
+# Install python packages to allow upload to aws S3
+pip3 install setuptools
+pip3 install awscli
 
 # Grab a new git
 add-apt-repository ppa:git-core/ppa -y
