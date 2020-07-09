@@ -5,9 +5,9 @@ WORKDIR /sdk-build
 COPY setup.sh .
 
 RUN ./setup.sh && \
- useradd -m build --shell /bin/bash && \
- echo 'build ALL = NOPASSWD: ALL' > /etc/sudoers.d/build && \
- chmod 0440 /etc/sudoers.d/build
+ useradd -m buildkite-agent --shell /bin/bash --uid 2000 && \
+ echo 'buildkite-agent ALL = NOPASSWD: ALL' > /etc/sudoers.d/buildkite-agent && \
+ chmod 0440 /etc/sudoers.d/buildkite-agent
 
 # Set the locale
 RUN locale-gen en_US.UTF-8
