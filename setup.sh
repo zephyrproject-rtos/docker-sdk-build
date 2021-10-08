@@ -37,3 +37,6 @@ pip3 install awscli
 add-apt-repository ppa:git-core/ppa -y
 apt-get update
 apt-get install git -y
+
+# Install updated root certificates
+apt-get install -y ca-certificates
