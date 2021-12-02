@@ -3,6 +3,9 @@ FROM ubuntu:18.04
 ARG UID=1001
 ARG GID=1001
 
+# Make bash the default shell
+ENV SHELL /bin/bash
+
 # Install packages
 RUN apt-get clean
 RUN apt-get update
