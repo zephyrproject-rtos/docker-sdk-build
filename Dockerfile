@@ -57,4 +57,6 @@ RUN groupadd -g $GID -o build-agent && \
     echo 'build-agent ALL = NOPASSWD: ALL' > /etc/sudoers.d/build-agent && \
     chmod 0440 /etc/sudoers.d/build-agent
 
-USER build-agent
+# NOTE: Do not switch to a non-root user because this creates all sorts of
+#       permission-related problems with the GitHub Actions runner.
+# USER build-agent
