@@ -4,7 +4,7 @@ ARG UID=1001
 ARG GID=1001
 
 # Make bash the default shell
-ENV SHELL /bin/bash
+ENV SHELL=/bin/bash
 
 # Install packages
 RUN apt-get clean
@@ -19,9 +19,9 @@ RUN apt-get install -y --no-install-recommends \
 
 # Set the locale
 RUN locale-gen en_US.UTF-8
-ENV LANG en_US.UTF-8
-ENV LANGUAGE en_US:en
-ENV LC_ALL en_US.UTF-8
+ENV LANG=en_US.UTF-8
+ENV LANGUAGE=en_US:en
+ENV LC_ALL=en_US.UTF-8
 
 # The package sets are based on Yocto & crosstool-ng docs/references:
 #
