@@ -35,7 +35,8 @@ RUN apt-get install -y --no-install-recommends \
 	python3-dev autoconf automake libtool libtool-bin gawk wget bzip2 \
 	xz-utils unzip patch libstdc++6 diffstat build-essential chrpath \
 	socat cpio python python3 python3-pip python3-pexpect \
-	python3-setuptools debianutils iputils-ping ca-certificates
+	python3-setuptools debianutils iputils-ping ca-certificates \
+	ninja-build
 
 # Install python3.8-dev for build w/GDB
 RUN apt-get install -y --no-install-recommends python3.8-dev
@@ -45,6 +46,9 @@ RUN apt-get install -y --no-install-recommends makeself p7zip-full tree curl
 
 # Install python packages to allow upload to aws S3
 RUN pip3 install awscli
+
+# Install meson to allow building picolibc
+RUN pip3 install meson
 
 # Grab a new git
 RUN add-apt-repository ppa:git-core/ppa -y && \
