@@ -16,7 +16,7 @@ RUN apt-get upgrade -y
 # sudo to make life easier when running as build user
 # vim.tiny so we have an editor
 RUN apt-get install -y --no-install-recommends \
-	software-properties-common locales sudo vim.tiny
+	software-properties-common locales locales-all sudo vim.tiny
 
 # Set the locale
 RUN locale-gen en_US.UTF-8
