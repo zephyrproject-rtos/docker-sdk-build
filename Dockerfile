@@ -9,6 +9,7 @@ ENV SHELL=/bin/bash
 # Install packages
 RUN apt-get clean
 RUN apt-get update
+RUN apt-get upgrade -y
 
 # software-properties for add-apt-repository
 # locales for LANG support
