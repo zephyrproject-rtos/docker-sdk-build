@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM python:3.10-buster
 
 ARG UID=1001
 ARG GID=1001
@@ -37,9 +37,6 @@ RUN apt-get install -y --no-install-recommends \
 	socat cpio python python3 python3-pip python3-pexpect \
 	python3-setuptools debianutils iputils-ping ca-certificates \
 	ninja-build
-
-# Install python3.8-dev for build w/GDB
-RUN apt-get install -y --no-install-recommends python3.8-dev
 
 # Install packages for creating SDK packages
 RUN apt-get install -y --no-install-recommends makeself p7zip-full tree curl
