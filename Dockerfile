@@ -47,11 +47,6 @@ RUN pip3 install awscli
 # Install meson to allow building picolibc
 RUN pip3 install meson
 
-# Grab a new git
-RUN add-apt-repository ppa:git-core/ppa -y && \
-    apt-get update && \
-    apt-get install -y git
-
 # Add build-agent user
 RUN groupadd -g $GID -o build-agent && \
     useradd -u $UID -m -g build-agent build-agent --shell /bin/bash && \
