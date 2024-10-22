@@ -5,8 +5,8 @@ ARG CMAKE_VERSION=3.30.5
 ARG UID=1001
 ARG GID=1001
 
-# Make bash the default shell
-ENV SHELL=/bin/bash
+# Set default shell during Docker image build to bash
+SHELL ["/bin/bash", "-c"]
 
 # Install packages
 RUN apt-get clean
