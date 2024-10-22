@@ -47,7 +47,8 @@ RUN apt-get install -y --no-install-recommends makeself p7zip-full tree curl
 # Install CMake
 RUN wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}-linux-${HOSTTYPE}.sh && \
 	chmod +x cmake-${CMAKE_VERSION}-linux-${HOSTTYPE}.sh && \
-	./cmake-${CMAKE_VERSION}-linux-${HOSTTYPE}.sh --skip-license --prefix=/usr/local
+	./cmake-${CMAKE_VERSION}-linux-${HOSTTYPE}.sh --skip-license --prefix=/usr/local && \
+	rm cmake-${CMAKE_VERSION}-linux-${HOSTTYPE}.sh
 
 # Install python packages to allow upload to aws S3
 RUN pip3 install awscli
