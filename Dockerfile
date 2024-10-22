@@ -2,6 +2,7 @@ FROM python:3.10-buster
 
 ARG CMAKE_VERSION=3.30.5
 ARG NINJA_VERSION=1.12.1
+ARG QEMU_VERSION=8.2.2
 
 ARG UID=1001
 ARG GID=1001
@@ -62,6 +63,17 @@ RUN pip3 install awscli
 
 # Install meson to allow building picolibc
 RUN pip3 install meson
+
+# Install QEMU
+RUN wget https://download.qemu.org/qemu-${QEMU_VERSION}.tar.xz && \
+	tar Jxf qemu-${QEMU_VERSION}.tar.xz && \
+	pushd qemu-${QEMU_VERSION} && \
+	./configure --target-list="aarch64-softmmu,arm-softmmu,riscv32-softmmu,riscv64-softmmu" && \
+	make -j$(nproc) && \
+	make install && \
+	popd && \
+	rm -rf qemu-${QEMU_VERSION} && \
+	rm qemu-${QEMU_VERSION}.tar.xz
 
 # Add build-agent user
 RUN groupadd -g $GID -o build-agent && \
