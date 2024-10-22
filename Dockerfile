@@ -1,6 +1,7 @@
 FROM python:3.10-buster
 
 ARG CMAKE_VERSION=3.30.5
+ARG NINJA_VERSION=1.12.1
 
 ARG UID=1001
 ARG GID=1001
@@ -38,8 +39,7 @@ RUN apt-get install -y --no-install-recommends \
 	python3-dev autoconf automake libtool libtool-bin gawk wget bzip2 \
 	xz-utils unzip patch libstdc++6 diffstat build-essential chrpath \
 	socat cpio python python3 python3-pip python3-pexpect \
-	python3-setuptools debianutils iputils-ping ca-certificates \
-	ninja-build
+	python3-setuptools debianutils iputils-ping ca-certificates
 
 # Install packages for creating SDK packages
 RUN apt-get install -y --no-install-recommends makeself p7zip-full tree curl
@@ -49,6 +49,13 @@ RUN wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cm
 	chmod +x cmake-${CMAKE_VERSION}-linux-${HOSTTYPE}.sh && \
 	./cmake-${CMAKE_VERSION}-linux-${HOSTTYPE}.sh --skip-license --prefix=/usr/local && \
 	rm cmake-${CMAKE_VERSION}-linux-${HOSTTYPE}.sh
+
+# Install ninja
+RUN NINJA_SUFFIX=$(case $HOSTTYPE in aarch64) echo "-aarch64";; esac) && \
+	wget https://github.com/ninja-build/ninja/releases/download/v${NINJA_VERSION}/ninja-linux${NINJA_SUFFIX}.zip && \
+	unzip ninja-linux${NINJA_SUFFIX}.zip && \
+	mv ninja /usr/local/bin && \
+	rm ninja-linux${NINJA_SUFFIX}.zip
 
 # Install python packages to allow upload to aws S3
 RUN pip3 install awscli
