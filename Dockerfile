@@ -1,5 +1,7 @@
 FROM python:3.10-buster
 
+ARG CMAKE_VERSION=3.30.5
+
 ARG UID=1001
 ARG GID=1001
 
@@ -41,6 +43,11 @@ RUN apt-get install -y --no-install-recommends \
 
 # Install packages for creating SDK packages
 RUN apt-get install -y --no-install-recommends makeself p7zip-full tree curl
+
+# Install CMake
+RUN wget https://github.com/Kitware/CMake/releases/download/v${CMAKE_VERSION}/cmake-${CMAKE_VERSION}-linux-${HOSTTYPE}.sh && \
+	chmod +x cmake-${CMAKE_VERSION}-linux-${HOSTTYPE}.sh && \
+	./cmake-${CMAKE_VERSION}-linux-${HOSTTYPE}.sh --skip-license --prefix=/usr/local
 
 # Install python packages to allow upload to aws S3
 RUN pip3 install awscli
