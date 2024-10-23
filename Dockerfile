@@ -64,6 +64,10 @@ RUN pip3 install awscli
 # Install meson to allow building picolibc
 RUN pip3 install meson
 
+# Install MinGW-w64 toolchain
+COPY mingw-build.sh /mingw-build.sh
+RUN /mingw-build.sh && rm -f /mingw-build.sh
+
 # Install QEMU
 RUN wget https://download.qemu.org/qemu-${QEMU_VERSION}.tar.xz && \
 	tar Jxf qemu-${QEMU_VERSION}.tar.xz && \
