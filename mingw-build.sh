@@ -68,7 +68,7 @@ build_mingw_toolchain() {
     --target=x86_64-w64-mingw32 \
     --disable-multilib \
     --enable-languages=c,c++ \
-    --enable-threads=win32 \
+    --enable-threads=${thread_model} \
     --with-headers
   make -j$(nproc) all-gcc
   make install-gcc
