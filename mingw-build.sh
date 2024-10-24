@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -euo pipefail
+
 BINUTILS_VERSION=2.42
 GCC_VERSION=13.2.0
 MINGW_VERSION=12.0.0
