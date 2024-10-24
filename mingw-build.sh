@@ -87,6 +87,16 @@ build_mingw_toolchain() {
   make install -j$(nproc)
   popd
 
+  # Build MinGW winpthreads
+  mkdir mingw-winpthreads
+  pushd mingw-winpthreads
+  ../../src/mingw-w64-v${MINGW_VERSION}/mingw-w64-libraries/winpthreads/configure \
+    --prefix=${prefix}/x86_64-w64-mingw32 \
+    --host=x86_64-w64-mingw32
+  make -j$(nproc)
+  make install
+  popd
+
   # Build final GCC
   pushd gcc
   make -j$(nproc)
