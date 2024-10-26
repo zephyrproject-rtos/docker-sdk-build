@@ -103,6 +103,12 @@ build_mingw_toolchain() {
   make install
   popd
 
+  # Place libwinpthread-1.dll in 'lib' directory so that it can be discovered
+  # using 'clang -print-file-name=libwinpthread-1.dll'.
+  pushd ${prefix}/x86_64-w64-mingw32
+  cp bin/libwinpthread-1.dll lib
+  popd
+
   # Restore environment
   popd
   export PATH=${old_path}
