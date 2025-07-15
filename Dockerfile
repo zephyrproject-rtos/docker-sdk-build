@@ -10,10 +10,12 @@ ARG GID=1001
 # Set default shell during Docker image build to bash
 SHELL ["/bin/bash", "-c"]
 
-# Install packages
-RUN apt-get clean
-RUN apt-get update
-RUN apt-get upgrade -y
+# Upgrade packages
+RUN <<EOF
+	apt-get clean
+	apt-get update
+	apt-get upgrade -y
+EOF
 
 # software-properties for add-apt-repository
 # locales for LANG support
