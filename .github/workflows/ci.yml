@@ -25,7 +25,7 @@ jobs:
     runs-on:
       group: ${{ matrix.variant.builder }}
     container:
-      image: ghcr.io/zephyrproject-rtos/image-build:v1.0.0
+      image: ghcr.io/zephyrproject-rtos/image-build:v1.1.0
 
     strategy:
       fail-fast: true
@@ -93,7 +93,7 @@ jobs:
     runs-on:
       group: zephyr-runner-v2-linux-x64-4xlarge
     container:
-      image: ghcr.io/zephyrproject-rtos/image-build:v1.0.0
+      image: ghcr.io/zephyrproject-rtos/image-build:v1.1.0
     needs: build
     if: ${{ github.event_name != 'pull_request' }}
 
