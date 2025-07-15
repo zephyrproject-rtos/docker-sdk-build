@@ -12,6 +12,8 @@ SHELL ["/bin/bash", "-c"]
 
 # Upgrade packages
 RUN <<EOF
+	sed -i 's/deb.debian.org/archive.debian.org/g' /etc/apt/sources.list
+
 	apt-get clean
 	apt-get update
 	apt-get upgrade -y
