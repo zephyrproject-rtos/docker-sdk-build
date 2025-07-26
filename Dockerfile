@@ -119,8 +119,15 @@ RUN <<EOF
 EOF
 
 # Install MinGW-w64 toolchain
-COPY mingw-build.sh /mingw-build.sh
-RUN /mingw-build.sh && rm -f /mingw-build.sh
+RUN --mount=source=mingw/tarballs,target=/mingw/tarballs \
+    --mount=source=mingw/scripts,target=/mingw/scripts \
+    <<EOF
+	pushd /mingw
+	scripts/mingw-fetch.sh toolchain
+	scripts/mingw-build-toolchain.sh
+	popd
+	rm -rf /mingw/src /mingw/build
+EOF
 
 # Install QEMU for libc testing
 RUN <<EOF
