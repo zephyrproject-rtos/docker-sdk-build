@@ -8,7 +8,7 @@ ARG UID=1001
 ARG GID=1001
 
 # Set default shell during Docker image build to bash
-SHELL ["/bin/bash", "-c"]
+SHELL ["/bin/bash", "-eo", "pipefail", "-c"]
 
 # Upgrade packages
 RUN <<EOF
@@ -125,6 +125,17 @@ RUN --mount=source=mingw/tarballs,target=/mingw/tarballs \
 	pushd /mingw
 	scripts/mingw-fetch.sh toolchain
 	scripts/mingw-build-toolchain.sh
+	popd
+	rm -rf /mingw/src /mingw/build
+EOF
+
+# Install MinGW-w64 libraries
+RUN --mount=source=mingw/tarballs,target=/mingw/tarballs \
+    --mount=source=mingw/scripts,target=/mingw/scripts \
+    <<EOF
+	pushd /mingw
+	scripts/mingw-fetch.sh lib
+	scripts/mingw-build-lib.sh
 	popd
 	rm -rf /mingw/src /mingw/build
 EOF
