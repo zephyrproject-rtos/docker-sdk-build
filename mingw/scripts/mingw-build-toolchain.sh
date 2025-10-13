@@ -15,7 +15,7 @@ build_mingw_toolchain() {
   local prefix=/opt/mingw-w64-${thread_model}
 
   echo "@@@ Building MinGW-w64 toolchain with '${thread_model}' thread model"
-  
+
   # Add prefix bin directory to PATH to aid toolchain discovery
   export PATH="${prefix}/bin:${PATH}"
 
