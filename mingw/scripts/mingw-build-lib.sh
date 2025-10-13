@@ -182,3 +182,25 @@ pushd gnutls
 make -j$(nproc)
 make install
 popd
+
+# Build boost
+cp -R ../src/boost_${BOOST_VERSION//./_} boost
+pushd boost
+
+./bootstrap.sh \
+  --with-toolset=gcc \
+  --with-libraries=regex \
+  --without-icu
+
+sed -i \
+  "s/using gcc ;/using gcc : mingw : ${mingw_triplet}-g++ ;/g" \
+  project-config.jam
+
+./b2 install \
+  toolset=gcc-mingw \
+  link=static \
+  threading=multi \
+  variant=release \
+  --prefix=${mingw_sysroot}
+
+popd

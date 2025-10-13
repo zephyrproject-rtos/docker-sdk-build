@@ -36,6 +36,7 @@ if [ "${fetch_lib}" == "y" ]; then
   fetch_libtasn1="y"
   fetch_libidn2="y"
   fetch_gnutls="y"
+  fetch_boost="y"
 fi
 
 if [ "${op_type}" != "fetch_only" ]; then
@@ -199,3 +200,26 @@ process_lib \
   gnutls \
   ${GNUTLS_VERSION} \
   https://www.gnupg.org/ftp/gcrypt/gnutls/v${GNUTLS_VERSION%.*}/gnutls-${GNUTLS_VERSION}.tar.xz
+
+## Process boost
+process_lib_boost()
+{
+  local src_dir="boost_${BOOST_VERSION//./_}"
+  local src_file="../tarballs/boost_${BOOST_VERSION//./_}.tar.bz2"
+
+  if [ ! -f "${src_file}" ]; then
+    echo "@@@ Downloading boost tarball ..."
+    wget \
+      -O ${src_file} \
+      https://archives.boost.io/release/${BOOST_VERSION}/source/boost_${BOOST_VERSION//./_}.tar.bz2
+  fi
+
+  if [ ! -d "${src_dir}" ] && [ "${op_extract}" == "y" ]; then
+    echo "@@@ Extracting boost tarball ..."
+    tar xf ${src_file}
+  fi
+}
+
+if [ "${fetch_boost}" == "y" ]; then
+  process_lib_boost
+fi
