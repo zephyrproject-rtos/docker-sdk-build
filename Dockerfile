@@ -119,7 +119,7 @@ RUN <<EOF
 EOF
 
 # Install MinGW-w64 toolchain
-RUN --mount=source=mingw/tarballs,target=/mingw/tarballs \
+RUN --mount=source=mingw/tarballs,target=/mingw/tarballs,rw \
     --mount=source=mingw/scripts,target=/mingw/scripts \
     <<EOF
 	pushd /mingw
@@ -130,7 +130,7 @@ RUN --mount=source=mingw/tarballs,target=/mingw/tarballs \
 EOF
 
 # Install MinGW-w64 libraries
-RUN --mount=source=mingw/tarballs,target=/mingw/tarballs \
+RUN --mount=source=mingw/tarballs,target=/mingw/tarballs,rw \
     --mount=source=mingw/scripts,target=/mingw/scripts \
     <<EOF
 	pushd /mingw
