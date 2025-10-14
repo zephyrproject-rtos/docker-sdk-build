@@ -128,61 +128,6 @@ meson install
 ln -s ${mingw_sysroot}/bin/gdbus-codegen ${mingw_bin}/gdbus-codegen
 popd
 
-# Build nettle
-mkdir nettle
-pushd nettle
-../../src/nettle-${NETTLE_VERSION}/configure \
-  --prefix=${mingw_sysroot} \
-  --host=${mingw_triplet} \
-  --enable-shared \
-  --disable-static \
-  --enable-public-key
-make -j$(nproc)
-make install
-popd
-
-# Build libtasn1
-mkdir libtasn1
-pushd libtasn1
-../../src/libtasn1-${LIBTASN1_VERSION}/configure \
-  --prefix=${mingw_sysroot} \
-  --host=${mingw_triplet} \
-  --enable-shared \
-  --disable-static
-make -j$(nproc)
-make install
-popd
-
-# Build libidn2
-mkdir libidn2
-pushd libidn2
-../../src/libidn2-${LIBIDN2_VERSION}/configure \
-  --prefix=${mingw_sysroot} \
-  --host=${mingw_triplet} \
-  --enable-shared \
-  --disable-static
-make -j$(nproc)
-make install
-popd
-
-# Build gnutls
-mkdir gnutls
-pushd gnutls
-../../src/gnutls-${GNUTLS_VERSION}/configure \
-  --prefix=${mingw_sysroot} \
-  --host=${mingw_triplet} \
-  --enable-shared \
-  --disable-static \
-  --enable-cxx \
-  --enable-openssl-compatibility \
-  --disable-libdane \
-  --disable-tests \
-  --disable-doc \
-  --without-p11-kit
-make -j$(nproc)
-make install
-popd
-
 # Build boost
 cp -R ../src/boost_${BOOST_VERSION//./_} boost
 pushd boost
