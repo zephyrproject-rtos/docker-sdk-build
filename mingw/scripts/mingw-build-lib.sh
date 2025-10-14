@@ -29,7 +29,7 @@ pushd libiconv
   --prefix=${mingw_sysroot} \
   --host=${mingw_triplet} \
   --enable-shared \
-  --disable-static
+  --enable-static
 make -j$(nproc)
 make install
 popd
@@ -41,7 +41,7 @@ pushd libunistring
   --prefix=${mingw_sysroot} \
   --host=${mingw_triplet} \
   --enable-shared \
-  --disable-static \
+  --enable-static \
   --enable-threads=windows
 make -j$(nproc)
 make install
@@ -54,7 +54,7 @@ pushd gettext
   --prefix=${mingw_sysroot} \
   --host=${mingw_triplet} \
   --enable-shared \
-  --disable-static \
+  --enable-static \
   --enable-threads=win32 \
   --disable-java \
   --disable-java-native \
@@ -70,8 +70,8 @@ pushd gmp
 ../../src/gmp-${GMP_VERSION}/configure \
   --prefix=${mingw_sysroot} \
   --host=${mingw_triplet} \
-  --enable-shared \
-  --disable-static \
+  --enable-static \
+  --disable-shared \
   --enable-cxx
 make -j$(nproc)
 make install
@@ -82,7 +82,7 @@ mkdir zlib
 pushd zlib
 CHOST=${mingw_triplet} ../../src/zlib-${ZLIB_VERSION}/configure \
   --prefix=${mingw_sysroot} \
-  --shared
+  --static
 make -j$(nproc)
 make install
 popd
@@ -94,7 +94,7 @@ pushd libpng
   --prefix=${mingw_sysroot} \
   --host=${mingw_triplet} \
   --enable-shared \
-  --disable-static
+  --enable-static
 make -j$(nproc)
 make install
 popd
@@ -121,7 +121,7 @@ meson setup \
   --prefix=${mingw_sysroot} \
   --buildtype=release \
   -Dlibelf=disabled \
-  --default-library=shared \
+  --default-library=static \
   ../../src/glib-${GLIB_VERSION}
 meson compile
 meson install
