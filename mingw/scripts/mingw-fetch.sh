@@ -32,10 +32,6 @@ if [ "${fetch_lib}" == "y" ]; then
   fetch_libpng="y"
   fetch_pixman="y"
   fetch_glib="y"
-  fetch_nettle="y"
-  fetch_libtasn1="y"
-  fetch_libidn2="y"
-  fetch_gnutls="y"
   fetch_boost="y"
 fi
 
@@ -176,30 +172,6 @@ process_lib \
   glib \
   ${GLIB_VERSION} \
   https://download.gnome.org/sources/glib/${GLIB_VERSION%.*}/glib-${GLIB_VERSION}.tar.xz
-
-## Process nettle
-process_lib \
-  nettle \
-  ${NETTLE_VERSION} \
-  https://ftp.gnu.org/gnu/nettle/nettle-${NETTLE_VERSION}.tar.gz
-
-## Process libtasn1
-process_lib \
-  libtasn1 \
-  ${LIBTASN1_VERSION} \
-  https://ftp.gnu.org/gnu/libtasn1/libtasn1-${LIBTASN1_VERSION}.tar.gz
-
-## Process libidn2
-process_lib \
-  libidn2 \
-  ${LIBIDN2_VERSION} \
-  https://ftp.gnu.org/gnu/libidn/libidn2-${LIBIDN2_VERSION}.tar.gz
-
-## Process gnutls
-process_lib \
-  gnutls \
-  ${GNUTLS_VERSION} \
-  https://www.gnupg.org/ftp/gcrypt/gnutls/v${GNUTLS_VERSION%.*}/gnutls-${GNUTLS_VERSION}.tar.xz
 
 ## Process boost
 process_lib_boost()
