@@ -32,6 +32,8 @@ if [ "${fetch_lib}" == "y" ]; then
   fetch_libpng="y"
   fetch_pixman="y"
   fetch_glib="y"
+  fetch_libgpg_error="y"
+  fetch_libgcrypt="y"
   fetch_boost="y"
 fi
 
@@ -107,7 +109,7 @@ process_lib()
   local component=$1
   local version=$2
   local tarball_uri=$3
-  local fetch_var="fetch_${component}"
+  local fetch_var="fetch_${component//-/_}"
 
   if [ "${!fetch_var}" == "y" ]; then
     local src_dir="${component}-${version}"
@@ -172,6 +174,18 @@ process_lib \
   glib \
   ${GLIB_VERSION} \
   https://download.gnome.org/sources/glib/${GLIB_VERSION%.*}/glib-${GLIB_VERSION}.tar.xz
+
+## Process libgpg-error
+process_lib \
+  libgpg-error \
+  ${LIBGPG_ERROR_VERSION} \
+  https://www.gnupg.org/ftp/gcrypt/libgpg-error/libgpg-error-${LIBGPG_ERROR_VERSION}.tar.bz2
+
+## Process libgcrypt
+process_lib \
+  libgcrypt \
+  ${LIBGCRYPT_VERSION} \
+  https://www.gnupg.org/ftp/gcrypt/libgcrypt/libgcrypt-${LIBGCRYPT_VERSION}.tar.bz2
 
 ## Process boost
 process_lib_boost()

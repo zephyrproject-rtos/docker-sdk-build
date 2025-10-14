@@ -61,6 +61,7 @@ RUN <<EOF
 		g++ \
 		gawk \
 		gcc \
+		gettext \
 		gperf \
 		help2man \
 		iputils-ping \
