@@ -128,6 +128,31 @@ meson install
 ln -s ${mingw_sysroot}/bin/gdbus-codegen ${mingw_bin}/gdbus-codegen
 popd
 
+# Build libgpg-error
+mkdir libgpg-error
+pushd libgpg-error
+../../src/libgpg-error-${LIBGPG_ERROR_VERSION}/configure \
+  --prefix=${mingw_sysroot} \
+  --host=${mingw_triplet} \
+  --enable-shared \
+  --enable-static \
+  --enable-install-gpg-error-config
+make -j$(nproc)
+make install
+popd
+
+# Build libgcrypt
+mkdir libgcrypt
+pushd libgcrypt
+../../src/libgcrypt-${LIBGCRYPT_VERSION}/configure \
+  --prefix=${mingw_sysroot} \
+  --host=${mingw_triplet} \
+  --enable-shared \
+  --enable-static
+make -j$(nproc)
+make install
+popd
+
 # Build boost
 cp -R ../src/boost_${BOOST_VERSION//./_} boost
 pushd boost
