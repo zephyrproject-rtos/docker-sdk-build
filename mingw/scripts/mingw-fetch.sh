@@ -30,6 +30,7 @@ if [ "${fetch_lib}" == "y" ]; then
   fetch_gmp="y"
   fetch_zlib="y"
   fetch_libpng="y"
+  fetch_libjpeg_turbo="y"
   fetch_pixman="y"
   fetch_glib="y"
   fetch_libgpg_error="y"
@@ -162,6 +163,12 @@ process_lib \
   libpng \
   ${LIBPNG_VERSION} \
   https://download.sourceforge.net/libpng/libpng-${LIBPNG_VERSION}.tar.xz
+
+## Process libjpeg-turbo
+process_lib \
+  libjpeg-turbo \
+  ${LIBJPEG_TURBO_VERSION} \
+  https://github.com/libjpeg-turbo/libjpeg-turbo/releases/download/${LIBJPEG_TURBO_VERSION}/libjpeg-turbo-${LIBJPEG_TURBO_VERSION}.tar.gz
 
 ## Process pixman
 process_lib \

@@ -99,6 +99,24 @@ make -j$(nproc)
 make install
 popd
 
+# Build libjpeg-turbo
+mkdir libjpeg-turbo
+pushd libjpeg-turbo
+cmake \
+  -GNinja \
+  -DCMAKE_INSTALL_PREFIX=${mingw_sysroot} \
+  -DCMAKE_SYSTEM_NAME=Windows \
+  -DCMAKE_SYSTEM_PROCESSOR=AMD64 \
+  -DCMAKE_C_COMPILER=${mingw_triplet}-gcc \
+  -DCMAKE_RC_COMPILER=${mingw_triplet}-windres \
+  -DWITH_JPEG8=ON \
+  -DENABLE_SHARED=ON \
+  -DENABLE_STATIC=ON \
+  ../../src/libjpeg-turbo-${LIBJPEG_TURBO_VERSION}
+cmake --build .
+cmake --install .
+popd
+
 # Build pixman
 mkdir pixman
 pushd pixman

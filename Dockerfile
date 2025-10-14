@@ -70,6 +70,7 @@ RUN <<EOF
 		libtool \
 		libtool-bin \
 		make \
+		nasm \
 		patch \
 		python \
 		python3 \
