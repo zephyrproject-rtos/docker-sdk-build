@@ -58,7 +58,7 @@ if [ "${fetch_binutils}" == "y" ]; then
 
   if [ ! -f "${BINUTILS_FILE}" ]; then
     echo "@@@ Downloading Binutils tarball ..."
-    wget -O ${BINUTILS_FILE} https://ftp.gnu.org/gnu/binutils/${BINUTILS_FILE}
+    wget -O ${BINUTILS_FILE} https://ftp.gnu.org/gnu/binutils/$(basename ${BINUTILS_FILE})
   fi
 
   if [ ! -d "${BINUTILS_DIR}" ] && [ "${op_extract}" == "y" ]; then
@@ -74,7 +74,7 @@ if [ "${fetch_gcc}" == "y" ]; then
 
   if [ ! -f "${GCC_FILE}" ]; then
     echo "@@@ Downloading GCC tarball ..."
-    wget -O ${GCC_FILE} https://ftp.gnu.org/gnu/gcc/gcc-${GCC_VERSION}/${GCC_FILE}
+    wget -O ${GCC_FILE} https://ftp.gnu.org/gnu/gcc/gcc-${GCC_VERSION}/$(basename ${GCC_FILE})
   fi
 
   if [ ! -d "${GCC_DIR}" ] && [ "${op_extract}" == "y" ]; then
@@ -95,7 +95,7 @@ if [ "${fetch_mingw}" == "y" ]; then
 
   if [ ! -f "${MINGW_FILE}" ]; then
     echo "@@@ Downloading MinGW-w64 tarball ..."
-    wget -O ${MINGW_FILE} https://sourceforge.net/projects/mingw-w64/files/mingw-w64/mingw-w64-release/${MINGW_FILE}
+    wget -O ${MINGW_FILE} https://sourceforge.net/projects/mingw-w64/files/mingw-w64/mingw-w64-release/$(basename ${MINGW_FILE})
   fi
 
   if [ ! -d "${MINGW_DIR}" ] && [ "${op_extract}" == "y" ]; then
