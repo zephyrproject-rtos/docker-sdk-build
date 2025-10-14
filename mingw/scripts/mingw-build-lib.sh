@@ -126,6 +126,7 @@ meson setup \
   --buildtype=plain \
   -Ddefault_library=both \
   -Dgtk=disabled \
+  -Dlibpng=disabled \
   ../../src/pixman-${PIXMAN_VERSION}
 meson compile
 meson install
