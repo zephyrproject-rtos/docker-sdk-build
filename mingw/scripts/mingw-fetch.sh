@@ -35,6 +35,9 @@ if [ "${fetch_lib}" == "y" ]; then
   fetch_glib="y"
   fetch_libgpg_error="y"
   fetch_libgcrypt="y"
+  fetch_libusb="y"
+  fetch_hidapi_hidapi="y"
+  fetch_libftdi1="y"
   fetch_boost="y"
 fi
 
@@ -193,6 +196,24 @@ process_lib \
   libgcrypt \
   ${LIBGCRYPT_VERSION} \
   https://www.gnupg.org/ftp/gcrypt/libgcrypt/libgcrypt-${LIBGCRYPT_VERSION}.tar.bz2
+
+## Process libusb
+process_lib \
+  libusb \
+  ${LIBUSB_VERSION} \
+  https://github.com/libusb/libusb/releases/download/v${LIBUSB_VERSION}/libusb-${LIBUSB_VERSION}.tar.bz2
+
+## Process hidapi
+process_lib \
+  hidapi-hidapi \
+  ${HIDAPI_VERSION} \
+  https://github.com/libusb/hidapi/archive/refs/tags/hidapi-${HIDAPI_VERSION}.tar.gz
+
+## Process libftdi
+process_lib \
+  libftdi1 \
+  ${LIBFTDI_VERSION} \
+  https://www.intra2net.com/en/developer/libftdi/download/libftdi1-${LIBFTDI_VERSION}.tar.bz2
 
 ## Process boost
 process_lib_boost()
