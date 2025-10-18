@@ -172,6 +172,46 @@ make -j$(nproc)
 make install
 popd
 
+# Build libusb
+mkdir libusb
+pushd libusb
+../../src/libusb-${LIBUSB_VERSION}/configure \
+  --prefix=${mingw_sysroot} \
+  --host=${mingw_triplet} \
+  --enable-shared \
+  --enable-static
+make -j$(nproc)
+make install
+popd
+
+# Build hidapi
+mkdir hidapi
+pushd hidapi
+cmake \
+  -DCMAKE_INSTALL_PREFIX=${mingw_sysroot} \
+  -DCMAKE_SYSTEM_NAME=Windows \
+  -DCMAKE_SYSTEM_PROCESSOR=AMD64 \
+  -DCMAKE_C_COMPILER=${mingw_triplet}-gcc \
+  ../../src/hidapi-hidapi-${HIDAPI_VERSION}
+cmake --build .
+cmake --install .
+popd
+
+# Build libftdi
+mkdir libftdi
+pushd libftdi
+cmake \
+  -DCMAKE_INSTALL_PREFIX=${mingw_sysroot} \
+  -DCMAKE_SYSTEM_NAME=Windows \
+  -DCMAKE_SYSTEM_PROCESSOR=AMD64 \
+  -DCMAKE_C_COMPILER=${mingw_triplet}-gcc \
+  -DBUILD_TESTS=OFF \
+  -DDOCUMENTATION=OFF \
+  ../../src/libftdi1-${LIBFTDI_VERSION}
+cmake --build .
+cmake --install .
+popd
+
 # Build boost
 cp -R ../src/boost_${BOOST_VERSION//./_} boost
 pushd boost
