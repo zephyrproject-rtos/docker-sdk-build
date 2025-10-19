@@ -36,6 +36,7 @@ if [ "${fetch_lib}" == "y" ]; then
   fetch_libgpg_error="y"
   fetch_libgcrypt="y"
   fetch_libidn2="y"
+  fetch_openssl="y"
   fetch_libusb="y"
   fetch_hidapi_hidapi="y"
   fetch_libftdi1="y"
@@ -203,6 +204,12 @@ process_lib \
   libidn2 \
   ${LIBIDN2_VERSION} \
   https://ftp.gnu.org/gnu/libidn/libidn2-${LIBIDN2_VERSION}.tar.gz
+
+## Process openssl
+process_lib \
+  openssl \
+  ${OPENSSL_VERSION} \
+  https://github.com/openssl/openssl/releases/download/openssl-${OPENSSL_VERSION}/openssl-${OPENSSL_VERSION}.tar.gz
 
 ## Process libusb
 process_lib \

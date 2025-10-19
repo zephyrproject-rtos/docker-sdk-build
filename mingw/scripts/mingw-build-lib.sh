@@ -184,6 +184,18 @@ make -j$(nproc)
 make install
 popd
 
+# Build openssl
+mkdir openssl
+pushd openssl
+../../src/openssl-${OPENSSL_VERSION}/Configure \
+  --prefix=${mingw_sysroot} \
+  --cross-compile-prefix=${mingw_triplet}- \
+  --libdir=lib \
+  mingw64
+make -j$(nproc)
+make install_sw
+popd
+
 # Build libusb
 mkdir libusb
 pushd libusb
