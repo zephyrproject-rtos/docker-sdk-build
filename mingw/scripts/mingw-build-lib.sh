@@ -172,6 +172,18 @@ make -j$(nproc)
 make install
 popd
 
+# Build libidn2
+mkdir libidn2
+pushd libidn2
+../../src/libidn2-${LIBIDN2_VERSION}/configure \
+  --prefix=${mingw_sysroot} \
+  --host=${mingw_triplet} \
+  --enable-shared \
+  --enable-static
+make -j$(nproc)
+make install
+popd
+
 # Build libusb
 mkdir libusb
 pushd libusb
