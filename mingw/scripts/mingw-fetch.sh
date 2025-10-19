@@ -35,6 +35,7 @@ if [ "${fetch_lib}" == "y" ]; then
   fetch_glib="y"
   fetch_libgpg_error="y"
   fetch_libgcrypt="y"
+  fetch_libidn2="y"
   fetch_libusb="y"
   fetch_hidapi_hidapi="y"
   fetch_libftdi1="y"
@@ -196,6 +197,12 @@ process_lib \
   libgcrypt \
   ${LIBGCRYPT_VERSION} \
   https://www.gnupg.org/ftp/gcrypt/libgcrypt/libgcrypt-${LIBGCRYPT_VERSION}.tar.bz2
+
+## Process libidn2
+process_lib \
+  libidn2 \
+  ${LIBIDN2_VERSION} \
+  https://ftp.gnu.org/gnu/libidn/libidn2-${LIBIDN2_VERSION}.tar.gz
 
 ## Process libusb
 process_lib \
