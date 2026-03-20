@@ -1,4 +1,4 @@
-FROM python:3.10-buster
+FROM debian:10
 
 ARG CMAKE_VERSION=3.30.5
 ARG NINJA_VERSION=1.12.1
