@@ -1,5 +1,6 @@
 FROM debian:10
 
+ARG PYTHON_VERSION=3.12.13
 ARG CMAKE_VERSION=3.30.5
 ARG NINJA_VERSION=1.12.1
 ARG QEMU_VERSION=8.2.2
@@ -73,6 +74,7 @@ RUN <<EOF
 		make \
 		nasm \
 		patch \
+		pkg-config \
 		python \
 		python3 \
 		python3-dev \
@@ -93,6 +95,34 @@ RUN <<EOF
 		makeself \
 		p7zip-full \
 		tree
+EOF
+
+# Install packages required for building Python
+RUN <<EOF
+	apt-get install -y --no-install-recommends \
+		libbz2-dev \
+		libffi-dev \
+		libgdbm-dev \
+		liblzma-dev \
+		libncurses5-dev \
+		libnss3-dev \
+		libreadline-dev \
+		libsqlite3-dev \
+		libssl-dev \
+		zlib1g-dev
+EOF
+
+# Install Python
+RUN <<EOF
+	wget https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tar.xz
+	tar Jxf Python-${PYTHON_VERSION}.tar.xz
+	pushd Python-${PYTHON_VERSION}
+	./configure --enable-optimizations --with-ensurepip=install
+	make -j$(nproc)
+	make altinstall
+	popd
+	rm -rf Python-${PYTHON_VERSION}
+	rm Python-${PYTHON_VERSION}.tar.xz
 EOF
 
 # Install CMake
