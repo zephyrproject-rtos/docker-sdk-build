@@ -39,13 +39,20 @@ ENV LANG=en_US.UTF-8
 ENV LANGUAGE=en_US:en
 ENV LC_ALL=en_US.UTF-8
 
-# The package sets are based on Yocto & crosstool-ng docs/references:
+# Install required distro packages.
 #
 # Yocto:
 # https://www.yoctoproject.org/docs/2.3.4/ref-manual/ref-manual.html#ubuntu-packages
 #
 # crosstool-ng:
 # https://github.com/crosstool-ng/crosstool-ng/blob/master/testing/docker/ubuntu18.04/Dockerfile
+#
+# Python:
+# https://devguide.python.org/getting-started/setup-building/
+#
+# qemu:
+# https://www.qemu.org/docs/master/devel/build-environment.html
+
 RUN <<EOF
 	apt-get install -y --no-install-recommends \
 		autoconf \
@@ -54,8 +61,10 @@ RUN <<EOF
 		build-essential \
 		bzip2 \
 		ca-certificates \
+		ccache \
 		chrpath \
 		cpio \
+		curl \
 		debianutils \
 		diffstat \
 		flex \
@@ -67,12 +76,26 @@ RUN <<EOF
 		gperf \
 		help2man \
 		iputils-ping \
+		libbz2-dev \
+		libc6-dev \
+		libfdt-dev \
+		libffi-dev \
+		libgdbm-dev \
+		libglib2.0-dev \
+		liblzma-dev \
 		libncurses5-dev \
+		libnss3-dev \
+		libpixman-1-dev \
+		libreadline-dev \
+		libsqlite3-dev \
+		libssl-dev \
 		libstdc++6 \
 		libtool \
 		libtool-bin \
 		make \
+		makeself \
 		nasm \
+		p7zip-full \
 		patch \
 		pkg-config \
 		python \
@@ -83,32 +106,10 @@ RUN <<EOF
 		python3-setuptools \
 		socat \
 		texinfo \
+		tree \
 		unzip \
 		wget \
-		xz-utils
-EOF
-
-# Install packages for creating SDK packages
-RUN <<EOF
-	apt-get install -y --no-install-recommends \
-		curl \
-		makeself \
-		p7zip-full \
-		tree
-EOF
-
-# Install packages required for building Python
-RUN <<EOF
-	apt-get install -y --no-install-recommends \
-		libbz2-dev \
-		libffi-dev \
-		libgdbm-dev \
-		liblzma-dev \
-		libncurses5-dev \
-		libnss3-dev \
-		libreadline-dev \
-		libsqlite3-dev \
-		libssl-dev \
+		xz-utils \
 		zlib1g-dev
 EOF
 
