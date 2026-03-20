@@ -62,6 +62,7 @@ RUN <<EOF
 		gawk \
 		gcc \
 		gettext \
+		git \
 		gperf \
 		help2man \
 		iputils-ping \
