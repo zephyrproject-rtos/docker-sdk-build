@@ -118,9 +118,10 @@ RUN <<EOF
 	wget https://www.python.org/ftp/python/${PYTHON_VERSION}/Python-${PYTHON_VERSION}.tar.xz
 	tar Jxf Python-${PYTHON_VERSION}.tar.xz
 	pushd Python-${PYTHON_VERSION}
-	./configure --enable-optimizations --with-ensurepip=install
+	./configure --enable-shared --enable-optimizations --with-ensurepip=install
 	make -j$(nproc)
 	make altinstall
+	ldconfig
 	popd
 	rm -rf Python-${PYTHON_VERSION}
 	rm Python-${PYTHON_VERSION}.tar.xz
