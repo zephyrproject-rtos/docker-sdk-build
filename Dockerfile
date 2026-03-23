@@ -101,6 +101,7 @@ RUN <<EOF
 		python \
 		python3 \
 		python3-dev \
+		python3-packaging \
 		python3-pexpect \
 		python3-pip \
 		python3-setuptools \
